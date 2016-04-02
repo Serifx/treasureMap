@@ -1,0 +1,34 @@
+/* Doc Styles */
+
+.content {
+  margin: 20px;
+  position: relative;
+  z-index: 1;
+}
+.content-box {
+  display: inline-block;
+  position: relative;
+}
+.form-group {
+  margin: 5px 0;
+}
+canvas {
+  display: inline-block;
+  vertical-align: top;
+}
+input {
+  min-width: 200px;
+}
+
+#map {
+  /*position: relative;*/
+  z-index: 1;
+}
+#data {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+}

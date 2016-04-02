@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>图片里的秘密</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1">
+  <link rel="stylesheet" href="../assets/css/doc.css">
+</head>
+<body>
+  <div class="container">
+    <div class="form-group">
+      <label>选择加密文件： <input type="file" id="file"></label>
+    </div>
+    <hr>
+    <fieldset>
+      <legend>文字样式</legend>
+      <form>
+        <div class="form-group">
+          <label>文字内容： <input type="text" id="text" value="@Serifx"></label>
+        </div>
+        <div class="form-group">
+          <label>文字大小： <input type="number" id="font-size" min="12" max="50" value="50"> px</label>
+        </div>
+        <div class="form-group">
+          <label>文字颜色： <input type="color" id="color"></label>
+        </div>
+        <div class="form-group">
+          <button id="btn-addData" type="button">确定添加</button>
+        </div>
+      </form>
+    </fieldset>
+
+    <p>
+      <a id="btn-save" href="javascript:void(0);" target="_blank">保存加密图片</a>
+    </p>
+
+    <hr>
+
+    <div class="content">
+      <div class="content-box">
+        <canvas id="map"></canvas>
+        <canvas id="data"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="form-group">
+      <label>选择解密文件： <input type="file" id="file2"></label>
+    </div>
+    <hr>
+
+    <p>
+      <button id="btn-decrypt">解密</button>
+    </p>
+    <hr>
+
+    <div class="content">
+      <div class="content-box">
+        <canvas id="map2"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/treasuremap.js"></script>
+</body>
+</html>

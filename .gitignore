@@ -1,0 +1,10 @@
+.idea/
+# IntelliJ
+/out/
+
+# node.js
+node_modules/
+bower_components
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
