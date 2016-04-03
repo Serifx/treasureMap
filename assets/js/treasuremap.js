@@ -117,14 +117,24 @@
     var dataCtx = data.getContext('2d');
     data.width = map.width;
     data.height = map.height;
+
+    // 写文字
     dataCtx.font = 'italic ' + $$('#font-size').value + 'px Consolas';
-    data.textAlign = 'right';
+    dataCtx.textAlign = 'right';
     dataCtx.fillStyle = $$('#color').value;
-    dataCtx.textBaseline = 'top';
-    dataCtx.fillText($$('#text').value, 20, 20);
-    //txtData = dataCtx.getImageData(0,0, dataCtx.canvas.width, dataCtx.canvas.height);
+    dataCtx.textBaseline = 'bottom';
+    dataCtx.fillText($$('#text').value, data.width - 10, data.height - 10);
+
+    // 画图像
+    //var img = new Image();
+    //img.onload = function(){
+    //  dataCtx.drawImage(img,0, 0);
+    //  callback && callback(dataCtx);
+    //};
+    //img.src = '../assets/img/original/cat.gif';
 
     callback && callback(dataCtx);
+    //txtData = dataCtx.getImageData(0,0, dataCtx.canvas.width, dataCtx.canvas.height);
   };
 
   var loadImg = function (imageSrc, canvas, callback) {
@@ -177,6 +187,9 @@
     loadFile(this, function(blobURL){
       loadImg(blobURL, $$('#map'), function(context){
         srcData = context.getImageData(0,0, context.canvas.width, context.canvas.height);
+        drawData(function(ctx){
+          curData = ctx.getImageData(0,0, ctx.canvas.width, ctx.canvas.height);
+        });
       });
     });
   };
