@@ -26,17 +26,38 @@
     return document.querySelector(selector);
   };
 
-  var decryptData = function (originalData) {
-    var data = originalData.data;
+  var decryptData = function (originalData, color) {
+    var bit = 0; // 默认R通道
+    var offset = 3;
+    switch (color) {
+    case 'R':
+      bit = 0;
+      offset = 3;
+      break;
+    case 'G':
+      bit = 1;
+      offset = 2;
+      break;
+    case 'B':
+      bit = 2;
+      offset = 1;
+      break;
+    }
+
+    // 复制出一份图像数据进行处理并返回， 不对原始数据进行操作
+    var decryptedData = document.createElement('canvas').getContext('2d').createImageData(originalData);
+    decryptedData.data.set(originalData.data);
+
+    var data = decryptedData.data;
     for (var i = 0, l = data.length; i < l; i += 1) {
-      if (i % 4 === 0) { // R通道
+      if (i % 4 === bit) { // 通道
         if (data[i] % 2 === 0) {
           data[i] = 0;
         }
         else {
           data[i] = 255;
         }
-      } else if (i % 4 === 3) { // Alpha通道
+      } else if (i % 4 === (bit + offset)) { // Alpha通道
         continue;
       } else {
         // 关闭其他分量，不关闭也不影响，甚至更美观
@@ -46,10 +67,11 @@
 
     // 绘制到画布
     //ctx.putImageData(originalData, 0, 0);
-    return originalData;
+    return decryptedData;
   };
   var encryptData = function (originalData, newData, color) {
-    var bit, offset;
+    var bit = 0; // 默认R通道
+    var offset = 3;
     switch (color) {
       case 'R':
         bit = 0;
@@ -65,7 +87,11 @@
         break;
     }
 
-    var oldData = originalData.data;
+    // 复制出一份图像数据进行处理并返回， 不对原始数据进行操作
+    var encryptedData = document.createElement('canvas').getContext('2d').createImageData(originalData);
+    encryptedData.data.set(originalData.data);
+
+    var oldData = encryptedData.data;
     var _newData = newData.data;
     for (var i = 0, l = oldData.length; i < l; i += 1) {
       if(i % 4 === bit){
@@ -82,7 +108,7 @@
     }
 
     //ctx.putImageData(originalData, 0, 0);
-    return originalData;
+    return encryptedData;
   };
 
   var drawData = function(callback){
@@ -161,7 +187,7 @@
       return;
     }
 
-    var data = encryptData(srcData, curData, 'R');
+    var data = encryptData(srcData, curData, $$('#bit1').value || 'R');
 
     var _map = document.createElement('canvas');
     _map.width = data.width;
@@ -191,7 +217,7 @@
       return;
     }
 
-    var data = decryptData(srcData);
+    var data = decryptData(srcData,  $$('#bit2').value || 'R');
 
     $$('#map2').getContext('2d').putImageData(data, 0, 0);
   };

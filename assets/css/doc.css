@@ -16,7 +16,8 @@ canvas {
   display: inline-block;
   vertical-align: top;
 }
-input {
+input,
+select {
   min-width: 200px;
 }
 

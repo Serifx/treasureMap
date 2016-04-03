@@ -27,6 +27,13 @@
           <label>文字颜色： <input type="color" id="color"></label>
         </div>
         <div class="form-group">
+          <label>加密通道： <select name="bit1" id="bit1">
+            <option value="R">R通道</option>
+            <option value="G">G通道</option>
+            <option value="B">B通道</option>
+          </select></label>
+        </div>
+        <div class="form-group">
           <button id="btn-addData" type="button">确定添加</button>
         </div>
       </form>
@@ -49,6 +56,16 @@
   <div class="container">
     <div class="form-group">
       <label>选择解密文件： <input type="file" id="file2"></label>
+    </div>
+    <div class="form-group">
+      <label>
+        解密通道：
+        <select name="bit2" id="bit2">
+          <option value="R">R通道</option>
+          <option value="G">G通道</option>
+          <option value="B">B通道</option>
+        </select>
+      </label>
     </div>
     <hr>
 
