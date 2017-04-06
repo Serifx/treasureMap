@@ -119,11 +119,20 @@
     data.height = map.height;
 
     // 写文字
-    dataCtx.font = 'italic ' + $$('#font-size').value + 'px Consolas';
-    dataCtx.textAlign = 'right';
-    dataCtx.fillStyle = $$('#color').value;
+    dataCtx.save();
+
+    var font = 'italic ' + $$('#font-size').value + 'px ' + $$('#font-family').value;
+    var textAlign = 'right';
+    var fillStyle = $$('#color').value;
+
+    dataCtx.font = font;
+    dataCtx.textAlign = textAlign;
+    dataCtx.fillStyle = fillStyle;
     dataCtx.textBaseline = 'bottom';
-    dataCtx.fillText($$('#text').value, data.width - 10, data.height - 10);
+
+    dataCtx.fillText($$('#text').value, data.width - 10, data.height - 10);// - +$$('#font-size').value);
+
+    // dataCtx.fillText('Serifx@outlook.com', data.width - 5, data.height - 5);
 
     // 画图像
     //var img = new Image();
@@ -208,8 +217,8 @@
     _ctx = _map.getContext('2d');
     _ctx.putImageData(data, 0, 0);
 
-    this.setAttribute('download', 'encrypted.png');
-    this.setAttribute('href', _map.toDataURL());
+    this.setAttribute('download', 'encrypted_' + (~~(Math.random() * 10000)) + '.png');
+    this.setAttribute('href', _map.toDataURL('image/png', 1.0));
 
     _map = null;
   };
